@@ -91,7 +91,7 @@
     img { display: block; max-width: 100%; }
     html { scroll-behavior: smooth; }
 
-    /* ★ ここだけ修正：1440px固定 → 可変幅に変更 */
+   
     .lp-wrapper {
       position: relative;
       width: 100%;
@@ -116,7 +116,12 @@
 
     .btn-on-main img { display: block; }
 
-    .btn-cta-main img { width: 300px; }
+   .btn-cta-main img {
+  width: 20%;   
+  max-width: 300px;
+  min-width: 160px; 
+}
+
 
     .btn-cta-main {
       left: 1000px;
