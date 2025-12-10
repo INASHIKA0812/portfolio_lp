@@ -21,10 +21,11 @@
             background: #fff;
         }
         a { text-decoration: none; }
+
+        html { scroll-behavior: smooth; }
     </style>
 
     <style>
-        /* PC / SP 背景 */
         body.pc {
             background: url("images/main.png") no-repeat center top;
             background-size: cover;
@@ -36,73 +37,126 @@
     </style>
 
     <style>
-        .slider {
-            overflow: hidden;
+        .lp-wrapper {
             position: relative;
             width: 100%;
-            touch-action: pan-y;
+            max-width: 1440px;
+            margin: 0 auto;
         }
-        .slider-track {
-            display: flex;
-            transition: transform .35s ease;
-        }
-        .slide {
-            min-width: 100%;
-            flex-shrink: 0;
-        }
-    </style>
 
+        .lp-main-picture { display: block; }
+        .lp-main-image {
+            width: 100%;
+            max-width: 1440px;
+            height: auto;
+        }
+
+        .btn-on-main {
+            position: absolute;
+            display: inline-block;
+            text-decoration: none;
+            z-index: 10;
+        }
+
+        .btn-on-main img { display: block; width: 100%; }
+
+        /* CTAボタン（最初の固定位置） */
+        .btn-cta-main {
+            width: 20.8333%; /* 300px / 1440px */
+            left: 69.4444%;  /* 1000px / 1440px */
+            top: 850px;
+            transition: transform .25s ease;
+        }
+
+        /* 詳しくはこちら */
+        .btn-detail-1 { 
+            left: 6.9444%;   /* 100px / 1440px */
+            top: 2955px; 
+        }
+        .btn-detail-2 { 
+            left: 38.8888%;  /* 560px / 1440px */
+            top: 2955px; 
+        }
+        .btn-detail-3 { 
+            left: 70.8333%; /* 1020px / 1440px */
+            top: 2955px; 
+        }
+
+        /* 店舗ボタン */
+        .btn-store-1 { 
+            left: 65.9722%; /* 950px / 1440px */
+            top: 6095px; 
+        }
+        .btn-store-2 { 
+            left: 18.4027%; /* 265px / 1440px */
+            top: 7820px; 
+        }
+
+        /* アンカー */
+        .anchor-point {
+            position: absolute;
+            left: 0;
+            width: 1px;
+            height: 1px;
+            pointer-events: none;
+        }
+        #item_list.anchor-point   { top: 3234px; }
+        #wide_range.anchor-point  { top: 3200px; }
+        #no_brand_ok.anchor-point { top: 5100px; }
+        #methods.anchor-point     { top: 6019px; }
+        #reason.anchor-point      { top: 6019px; }
+
+
+        /* 固定CTA（スマホ向け） */
+        .btn-cta-float {
+            width: 200px;
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            transition: opacity .25s ease, transform .25s ease;
+            z-index: 20;
+        }
+        .btn-cta-float.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .btn-cta-float img { width: 263px; }
+        .btn-cta-float:hover { transform: translateY(-4px); }
+    </style>
 </head>
 
 <body>
 
-  <!-- LP 全体を包む -->
-  <div class="lp-wrapper" style="width:100%; max-width:1440px; margin:0 auto; position:relative;">
+    <audio id="clickAudio" src="images/click.mp3" preload="auto"></audio>
 
-    <!-- ★ メイン画像 -->
-    <picture class="lp-main-picture" style="display:block; position:relative;">
-      <source srcset="images/main-sp.png" media="(max-width: 768px)">
-      <img src="images/main.png" alt="LPデザインカンプ" class="lp-main-image">
+    <div class="lp-wrapper">
 
-      
-      <a href="reserve.html" target="_blank"
-        class="btn-on-main btn-cta-main"
-        style="
-          position:absolute;
-          left:69.4%;
-          top:59%;
-          transform:translate(-50%, -50%);
-          z-index:10;
-        ">
-        <img src="images/btn-cta.png" alt="査定のご予約はこちら"
-          style="width:21%; height:auto;">
-      </a>
+        <div id="item_list"   class="anchor-point"></div>
+        <div id="wide_range"  class="anchor-point"></div>
+        <div id="no_brand_ok" class="anchor-point"></div>
+        <div id="methods"     class="anchor-point"></div>
+        <div id="reason"      class="anchor-point"></div>
 
-    </picture>
+        <picture class="lp-main-picture">
+            <source srcset="images/main-sp.png" media="(max-width: 768px)">
+            <img src="images/main.png" alt="LPデザインカンプ" class="lp-main-image">
+        </picture>
 
-    <!-- ▼ 以下は元のボタン類 ▼ -->
+        <a href="reserve.html" target="_blank"
+           class="btn-on-main btn-cta-main js-click-sound">
+          <img src="images/btn-cta.png" alt="査定のご予約はこちら">
+        </a>
 
-    <a href="#methods" class="btn-on-main btn-detail-1" style="position:absolute; left:100px; top:2955px; z-index:10;">
-      <img src="images/btn-detail.png" alt="詳しくはこちら">
-    </a>
+        <a href="#methods" class="btn-on-main btn-detail-1 js-click-sound">
+          <img src="images/btn-detail.png" alt="詳しくはこちら">
+        </a>
 
-    <a href="#no_brand_ok" class="btn-on-main btn-detail-2" style="position:absolute; left:560px; top:2955px; z-index:10;">
-      <img src="images/btn-detail.png" alt="詳しくはこちら">
-    </a>
+        <a href="#no_brand_ok" class="btn-on-main btn-detail-2 js-click-sound">
+          <img src="images/btn-detail.png" alt="詳しくはこちら">
+        </a>
 
-    <a href="#item_list" class="btn-on-main btn-detail-3" style="position:absolute; left:1020px; top:2955px; z-index:10;">
-      <img src="images/btn-detail.png" alt="詳しくはこちら">
-    </a>
-
-    <a href="underconstruction.html" class="btn-on-main btn-store-1" style="position:absolute; left:950px; top:6095px; z-index:10;">
-      <img src="images/btn-store.png" alt="店舗情報はこちら">
-    </a>
-
-    <a href="underconstruction.html" class="btn-on-main btn-store-2" style="position:absolute; left:265px; top:7820px; z-index:10;">
-      <img src="images/btn-store.png" alt="店舗情報はこちら">
-    </a>
-
-  </div>
-
-</body>
-</html>
+        <a href="#item_list" class="btn-on-main btn-detail-3 js-click-sound">
