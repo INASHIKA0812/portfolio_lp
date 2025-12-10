@@ -91,7 +91,7 @@
     img { display: block; max-width: 100%; }
     html { scroll-behavior: smooth; }
 
-   
+    /* LP全体は可変幅（Fluid Layout） */
     .lp-wrapper {
       position: relative;
       width: 100%;
@@ -99,14 +99,21 @@
       margin: 0 auto;
     }
 
-    .lp-main-picture { display: block; }
+    /* ★ 画像の上に乗る要素を相対位置で扱うために必要 */
+    .lp-main-picture {
+      display: block;
+      position: relative;  /* ←これでCTAボタンが画像に連動して縮む */
+    }
+
     .lp-main-image {
       width: 100%;
-      max-width: 1440px;
       height: auto;
       display: block;
     }
 
+    /* =============================
+       CTA ボタン（画像と一緒に縮むように%指定）
+       ============================= */
     .btn-on-main {
       position: absolute;
       display: inline-block;
@@ -114,27 +121,21 @@
       z-index: 10;
     }
 
-    .btn-on-main img { display: block; }
-
-   .btn-cta-main {
-  left: 69.4%;   /* 1000px ÷ 1440px */
-  top: 59%;      /* 850px ÷ 1440px の目安 */
-}
-
-.btn-cta-main img {
-  width: 21%;    /* 300px ÷ 1440px に近い比率 */
-  max-width: none;
-  min-width: 0;
-}
-
-
-
+    /* CTAボタンの位置（1440px時基準 → ％換算） */
     .btn-cta-main {
-      left: 1000px;
-      top: 850px;
-      transition: transform .25s ease;
+      left: 69.4%;   /* 1000px ÷ 1440px */
+      top: 59%;      /* 850px ÷ 1440px */
+      transform: translate(-50%, -50%);
     }
 
+    /* CTAボタン画像も％で縮むようにする */
+    .btn-cta-main img {
+      width: 21%; /* 300px ÷ 1440px おおよそ */
+      max-width: none;
+      min-width: 0;
+    }
+
+    /* 他のボタンは従来通り（必要なら後で調整） */
     .btn-detail-1 { left: 100px; top: 2955px; }
     .btn-detail-2 { left: 560px; top: 2955px; }
     .btn-detail-3 { left: 1020px; top: 2955px; }
@@ -156,7 +157,7 @@
     #no_brand_ok.anchor-point { top: 5100px; }
     #methods.anchor-point { top: 6019px; }
 
-    /* 固定CTA */
+    /* 固定CTA（スマホ向け機能） */
     .btn-cta-float {
       width: 200px;
       position: fixed;
@@ -184,22 +185,18 @@
 
   <div class="lp-wrapper">
 
-    <div id="item_list"   class="anchor-point"></div>
-    <div id="wide_range"  class="anchor-point"></div>
-    <div id="no_brand_ok" class="anchor-point"></div>
-    <div id="methods"     class="anchor-point"></div>
-    <div id="reason"      class="anchor-point"></div>
-
     <picture class="lp-main-picture">
       <source srcset="images/main-sp.png" media="(max-width: 768px)">
       <img src="images/main.png" alt="LPデザインカンプ" class="lp-main-image">
     </picture>
 
+    <!-- CTAボタン（画像に連動して縮む） -->
     <a href="reserve.html" target="_blank"
        class="btn-on-main btn-cta-main js-click-sound">
       <img src="images/btn-cta.png" alt="査定のご予約はこちら">
     </a>
 
+    <!-- 既存のボタン類（そのまま） -->
     <a href="#methods" class="btn-on-main btn-detail-1 js-click-sound">
       <img src="images/btn-detail.png" alt="詳しくはこちら">
     </a>
@@ -224,12 +221,6 @@
 
   </div>
 
-  <a href="reserve.html" target="_blank"
-     class="btn-cta-float js-click-sound js-cta-float">
-    <img src="images/btn-cta.png" alt="査定のご予約はこちら"
-         class="js-cta-float-img">
-  </a>
-
   <script>
     const clickAudio = document.getElementById("clickAudio");
     document.querySelectorAll(".js-click-sound").forEach(el => {
@@ -239,30 +230,6 @@
           clickAudio.play();
         } catch (e) {}
       });
-    });
-
-    const ctaFloat = document.querySelector(".js-cta-float");
-    const ctaFloatImg = document.querySelector(".js-cta-float-img");
-
-    const ctaDefaultSrc = "images/btn-cta.png";
-    const ctaHoverSrc   = "images/btn-cta-hover.png";
-
-    const itemListAnchor = document.getElementById("item_list");
-    const showCtaScrollY = itemListAnchor ? itemListAnchor.offsetTop : 400;
-
-    window.addEventListener("scroll", () => {
-      if (window.scrollY > showCtaScrollY) {
-        ctaFloat.classList.add("is-visible");
-      } else {
-        ctaFloat.classList.remove("is-visible");
-      }
-    });
-
-    ctaFloat.addEventListener("mouseenter", () => {
-      ctaFloatImg.src = ctaHoverSrc;
-    });
-    ctaFloat.addEventListener("mouseleave", () => {
-      ctaFloatImg.src = ctaDefaultSrc;
     });
   </script>
 
