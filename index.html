@@ -23,8 +23,8 @@
         a { text-decoration: none; }
     </style>
 
-    <!-- PC/SP背景画像のパス修正 -->
     <style>
+        /* PC / SP 背景 */
         body.pc {
             background: url("images/main.png") no-repeat center top;
             background-size: cover;
@@ -33,21 +33,6 @@
             background: url("images/main-sp.png") no-repeat center top;
             background-size: contain;
         }
-    </style>
-
-    <style>
-        .btn {
-            position: absolute;
-            z-index: 5;
-        }
-        .anchor {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-        }
-        #item_list { top: 3234px; }
-        #wide_range { top: 5100px; }
-        #methods   { top: 6020px; }
     </style>
 
     <style>
@@ -67,171 +52,57 @@
         }
     </style>
 
-    <!-- click音パス修正 -->
-    <audio id="click-sound" src="images/click.mp3" preload="auto"></audio>
 </head>
 
-
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-  <meta charset="UTF-8">
-  <title>Re: Releaf ポートフォリオLP</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <style>
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "ヒラギノ角ゴ ProN",
-        "Yu Gothic", "メイリオ", sans-serif;
-      background: #ffffff;
-    }
-    img { display: block; max-width: 100%; }
-    html { scroll-behavior: smooth; }
-
-    /* LP全体は可変幅（Fluid Layout） */
-    .lp-wrapper {
-      position: relative;
-      width: 100%;
-      max-width: 1440px;
-      margin: 0 auto;
-    }
-
-    /* ★ 画像の上に乗る要素を相対位置で扱うために必要 */
-    .lp-main-picture {
-      display: block;
-      position: relative;  /* ←これでCTAボタンが画像に連動して縮む */
-    }
-
-    .lp-main-image {
-      width: 100%;
-      height: auto;
-      display: block;
-    }
-
-    /* =============================
-       CTA ボタン（画像と一緒に縮むように%指定）
-       ============================= */
-    .btn-on-main {
-      position: absolute;
-      display: inline-block;
-      text-decoration: none;
-      z-index: 10;
-    }
-
-    /* CTAボタンの位置（1440px時基準 → ％換算） */
-    .btn-cta-main {
-      left: 69.4%;   /* 1000px ÷ 1440px */
-      top: 59%;      /* 850px ÷ 1440px */
-      transform: translate(-50%, -50%);
-    }
-
-    /* CTAボタン画像も％で縮むようにする */
-    .btn-cta-main img {
-      width: 21%; /* 300px ÷ 1440px おおよそ */
-      max-width: none;
-      min-width: 0;
-    }
-
-    /* 他のボタンは従来通り（必要なら後で調整） */
-    .btn-detail-1 { left: 100px; top: 2955px; }
-    .btn-detail-2 { left: 560px; top: 2955px; }
-    .btn-detail-3 { left: 1020px; top: 2955px; }
-
-    .btn-store-1 { left: 950px; top: 6095px; }
-    .btn-store-2 { left: 265px; top: 7820px; }
-
-    .anchor-point {
-      position: absolute;
-      left: 0;
-      width: 1px;
-      height: 1px;
-      pointer-events: none;
-      z-index: 1;
-    }
-
-    #item_list.anchor-point { top: 3234px; }
-    #wide_range.anchor-point { top: 3200px; }
-    #no_brand_ok.anchor-point { top: 5100px; }
-    #methods.anchor-point { top: 6019px; }
-
-    /* 固定CTA（スマホ向け機能） */
-    .btn-cta-float {
-      width: 200px;
-      position: fixed;
-      right: 20px;
-      bottom: 20px;
-      opacity: 0;
-      transform: translateY(20px);
-      pointer-events: none;
-      transition: opacity .25s ease, transform .25s ease;
-      z-index: 20;
-    }
-    .btn-cta-float.is-visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .btn-cta-float img { width: 263px; }
-    .btn-cta-float:hover { transform: translateY(-4px); }
-  </style>
-
-</head>
 <body>
 
-  <audio id="clickAudio" src="images/click.mp3" preload="auto"></audio>
+  <!-- LP 全体を包む -->
+  <div class="lp-wrapper" style="width:100%; max-width:1440px; margin:0 auto; position:relative;">
 
-  <div class="lp-wrapper">
-
-    <picture class="lp-main-picture">
+    <!-- ★ メイン画像 -->
+    <picture class="lp-main-picture" style="display:block; position:relative;">
       <source srcset="images/main-sp.png" media="(max-width: 768px)">
       <img src="images/main.png" alt="LPデザインカンプ" class="lp-main-image">
+
+      
+      <a href="reserve.html" target="_blank"
+        class="btn-on-main btn-cta-main"
+        style="
+          position:absolute;
+          left:69.4%;
+          top:59%;
+          transform:translate(-50%, -50%);
+          z-index:10;
+        ">
+        <img src="images/btn-cta.png" alt="査定のご予約はこちら"
+          style="width:21%; height:auto;">
+      </a>
+
     </picture>
 
-    <!-- CTAボタン（画像に連動して縮む） -->
-    <a href="reserve.html" target="_blank"
-       class="btn-on-main btn-cta-main js-click-sound">
-      <img src="images/btn-cta.png" alt="査定のご予約はこちら">
-    </a>
+    <!-- ▼ 以下は元のボタン類 ▼ -->
 
-    <!-- 既存のボタン類（そのまま） -->
-    <a href="#methods" class="btn-on-main btn-detail-1 js-click-sound">
+    <a href="#methods" class="btn-on-main btn-detail-1" style="position:absolute; left:100px; top:2955px; z-index:10;">
       <img src="images/btn-detail.png" alt="詳しくはこちら">
     </a>
 
-    <a href="#no_brand_ok" class="btn-on-main btn-detail-2 js-click-sound">
+    <a href="#no_brand_ok" class="btn-on-main btn-detail-2" style="position:absolute; left:560px; top:2955px; z-index:10;">
       <img src="images/btn-detail.png" alt="詳しくはこちら">
     </a>
 
-    <a href="#item_list" class="btn-on-main btn-detail-3 js-click-sound">
+    <a href="#item_list" class="btn-on-main btn-detail-3" style="position:absolute; left:1020px; top:2955px; z-index:10;">
       <img src="images/btn-detail.png" alt="詳しくはこちら">
     </a>
 
-    <a href="underconstruction.html"
-       class="btn-on-main btn-store-1 js-click-sound">
+    <a href="underconstruction.html" class="btn-on-main btn-store-1" style="position:absolute; left:950px; top:6095px; z-index:10;">
       <img src="images/btn-store.png" alt="店舗情報はこちら">
     </a>
 
-    <a href="underconstruction.html"
-       class="btn-on-main btn-store-2 js-click-sound">
+    <a href="underconstruction.html" class="btn-on-main btn-store-2" style="position:absolute; left:265px; top:7820px; z-index:10;">
       <img src="images/btn-store.png" alt="店舗情報はこちら">
     </a>
 
   </div>
-
-  <script>
-    const clickAudio = document.getElementById("clickAudio");
-    document.querySelectorAll(".js-click-sound").forEach(el => {
-      el.addEventListener("click", () => {
-        try {
-          clickAudio.currentTime = 0;
-          clickAudio.play();
-        } catch (e) {}
-      });
-    });
-  </script>
 
 </body>
 </html>
