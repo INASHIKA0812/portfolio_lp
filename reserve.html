@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <title>査定のご予約フォーム | Re:leaf</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "ヒラギノ角ゴ ProN", "Yu Gothic", "メイリオ", sans-serif;
+      background: #f5f7f6;
+      color: #333;
+    }
+
+    .page-wrapper {
+      max-width: 960px;
+      margin: 40px auto 80px;
+      padding: 0 16px;
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+    header h1 {
+      margin: 0 0 8px;
+      font-size: 24px;
+    }
+    header p {
+      margin: 0;
+      font-size: 14px;
+      color: #666;
+    }
+
+    a.back-link {
+      display: inline-block;
+      margin-bottom: 16px;
+      font-size: 14px;
+      text-decoration: none;
+      color: #0b8c6b;
+    }
+    a.back-link:hover {
+      text-decoration: underline;
+    }
+
+    .reserve-section {
+      padding: 32px 24px;
+      border-radius: 8px;
+      border: 1px solid #d4e9e2;
+      background: #ffffff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.04);
+    }
+    .reserve-section h2 {
+      margin-top: 0;
+      margin-bottom: 12px;
+      font-size: 20px;
+      text-align: center;
+    }
+    .reserve-section p.lead {
+      text-align: center;
+      margin-bottom: 24px;
+      font-size: 13px;
+      color: #555;
+    }
+
+    .reserve-form-row {
+      margin-bottom: 16px;
+    }
+    .reserve-form-row label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 4px;
+    }
+    .reserve-form-row input[type="text"],
+    .reserve-form-row input[type="email"],
+    .reserve-form-row input[type="tel"],
+    .reserve-form-row textarea,
+    .reserve-form-row select {
+      width: 100%;
+      padding: 8px 10px;
+      font-size: 14px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    .reserve-form-row textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .reserve-form-inline {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .reserve-form-inline .reserve-form-row {
+      flex: 1;
+      min-width: 180px;
+    }
+
+    .reserve-submit {
+      text-align: center;
+      margin-top: 24px;
+    }
+    .reserve-submit button {
+      padding: 10px 32px;
+      font-size: 16px;
+      font-weight: bold;
+      border-radius: 999px;
+      border: none;
+      background: #0b8c6b;
+      color: #fff;
+      cursor: pointer;
+    }
+    .reserve-submit button:hover {
+      opacity: .9;
+    }
+
+    .note {
+      margin-top: 16px;
+      font-size: 12px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    @media (max-width: 768px) {
+      .page-wrapper {
+        margin: 20px auto 40px;
+      }
+      .reserve-section {
+        padding: 24px 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="page-wrapper">
+    <header>
+      <a href="index.html" class="back-link">← キャンペーンページに戻る</a>
+      <h1>査定のご予約フォーム</h1>
+      <p>秋冬アイテム買取強化キャンペーン 専用フォーム</p>
+    </header>
+
+    <section class="reserve-section">
+      <h2>査定のご予約</h2>
+      <p class="lead">必要事項をご入力のうえ送信してください。折り返し、担当スタッフよりご連絡いたします。</p>
+
+      <form>
+        <div class="reserve-form-row">
+          <label for="name">お名前</label>
+          <input type="text" id="name" name="name" placeholder="例）山田 太郎">
+        </div>
+
+        <div class="reserve-form-inline">
+          <div class="reserve-form-row">
+            <label for="tel">お電話番号</label>
+            <input type="tel" id="tel" name="tel" placeholder="例）090-1234-5678">
+          </div>
+          <div class="reserve-form-row">
+            <label for="email">メールアドレス</label>
+            <input type="email" id="email" name="email" placeholder="例）sample@example.com">
+          </div>
+        </div>
+
+        <div class="reserve-form-row">
+          <label for="method">ご希望の買取方法</label>
+          <select id="method" name="method">
+            <option value="">選択してください</option>
+            <option value="shop">店頭買取</option>
+            <option value="delivery">宅配買取</option>
+            <option value="visit">出張買取</option>
+          </select>
+        </div>
+
+        <div class="reserve-form-inline">
+          <div class="reserve-form-row">
+            <label for="date">ご希望日時（第1希望）</label>
+            <input type="text" id="date" name="date" placeholder="例）10月20日 14:00〜16:00">
+          </div>
+          <div class="reserve-form-row">
+            <label for="date2">ご希望日時（第2希望）</label>
+            <input type="text" id="date2" name="date2" placeholder="例）10月22日 午前中">
+          </div>
+        </div>
+
+        <div class="reserve-form-row">
+          <label for="items">お品物の種類・ブランド・点数など</label>
+          <textarea id="items" name="items" placeholder="例）レディースコート3点、マフラー2点、電気ストーブ1点 など"></textarea>
+        </div>
+
+        <div class="reserve-form-row">
+          <label for="message">その他ご要望・ご質問</label>
+          <textarea id="message" name="message" placeholder="ご連絡可能なお時間帯などありましたらご記入ください。"></textarea>
+        </div>
+
+        <div class="reserve-submit">
+          <button type="submit">この内容で送信する</button>
+        </div>
+
+        <p class="note">
+          ※ 本フォームはデモ用のため、実際の送信処理は行われません。<br>
+          ※ ポートフォリオとしてフォームレイアウト・設計意図をご確認ください。
+        </p>
+      </form>
+    </section>
+  </div>
+
+</body>
+</html>
